@@ -8,11 +8,29 @@ import "oaidl.idl";
 import "ocidl.idl";
 
 [
+	object,
+	uuid(476f3c6b-af1f-4ba6-97c1-004c5ad4d4ca),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IServiceHandler : IDispatch
+{
+};
+[
 	uuid(50150657-f850-49cc-8f8e-780e36172742),
 	version(1.0),
 ]
 library COMWindowsServicesLib
 {
 	importlib("stdole2.tlb");
+	[
+		uuid(c1f3a32f-8295-4a38-a8fb-487847b61ec9)
+	]
+	coclass ServiceHandler
+	{
+		[default] interface IServiceHandler;
+	};
 };
 
+import "shobjidl.idl";

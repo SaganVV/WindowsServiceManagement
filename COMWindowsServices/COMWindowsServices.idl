@@ -16,6 +16,7 @@ import "ocidl.idl";
 ]
 interface IServiceHandler : IDispatch
 {
+	[id(1)] HRESULT GetServices([out] BSTR** pOut);
 };
 [
 	uuid(50150657-f850-49cc-8f8e-780e36172742),

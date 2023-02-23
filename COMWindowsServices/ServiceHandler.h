@@ -53,6 +53,7 @@ public:
 
 
 
+	STDMETHOD(GetServices)(BSTR** pOut);
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(ServiceHandler), CServiceHandler)

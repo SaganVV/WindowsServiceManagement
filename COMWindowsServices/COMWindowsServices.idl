@@ -1,0 +1,18 @@
+// COMWindowsServices.idl : IDL source for COMWindowsServices
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (COMWindowsServices.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(50150657-f850-49cc-8f8e-780e36172742),
+	version(1.0),
+]
+library COMWindowsServicesLib
+{
+	importlib("stdole2.tlb");
+};
+

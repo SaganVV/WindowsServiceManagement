@@ -53,7 +53,9 @@ public:
 
 
 
-	STDMETHOD(GetServices)(BSTR** pOut);
+	STDMETHOD(GetServices)(SAFEARRAY** pOut, LPDWORD dwServicesReturned);
+	STDMETHOD(ServiceStart)(BSTR serviceName, LONG timeout);
+
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(ServiceHandler), CServiceHandler)

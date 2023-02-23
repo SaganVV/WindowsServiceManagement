@@ -97,7 +97,12 @@ EXTERN_C const IID IID_IServiceHandler;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetServices( 
-            /* [out] */ BSTR **pOut) = 0;
+            /* [out] */ SAFEARRAY * *pOut,
+            /* [out] */ LPDWORD dwServicesReturned) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ServiceStart( 
+            /* [in] */ BSTR serviceName,
+            /* [in] */ LONG timeout) = 0;
         
     };
     
@@ -167,7 +172,14 @@ EXTERN_C const IID IID_IServiceHandler;
         DECLSPEC_XFGVIRT(IServiceHandler, GetServices)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetServices )( 
             IServiceHandler * This,
-            /* [out] */ BSTR **pOut);
+            /* [out] */ SAFEARRAY * *pOut,
+            /* [out] */ LPDWORD dwServicesReturned);
+        
+        DECLSPEC_XFGVIRT(IServiceHandler, ServiceStart)
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ServiceStart )( 
+            IServiceHandler * This,
+            /* [in] */ BSTR serviceName,
+            /* [in] */ LONG timeout);
         
         END_INTERFACE
     } IServiceHandlerVtbl;
@@ -205,8 +217,11 @@ EXTERN_C const IID IID_IServiceHandler;
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IServiceHandler_GetServices(This,pOut)	\
-    ( (This)->lpVtbl -> GetServices(This,pOut) ) 
+#define IServiceHandler_GetServices(This,pOut,dwServicesReturned)	\
+    ( (This)->lpVtbl -> GetServices(This,pOut,dwServicesReturned) ) 
+
+#define IServiceHandler_ServiceStart(This,serviceName,timeout)	\
+    ( (This)->lpVtbl -> ServiceStart(This,serviceName,timeout) ) 
 
 #endif /* COBJMACROS */
 
@@ -245,10 +260,20 @@ unsigned char * __RPC_USER  BSTR_UserMarshal(  unsigned long *, unsigned char *,
 unsigned char * __RPC_USER  BSTR_UserUnmarshal(unsigned long *, unsigned char *, BSTR * ); 
 void                      __RPC_USER  BSTR_UserFree(     unsigned long *, BSTR * ); 
 
+unsigned long             __RPC_USER  LPSAFEARRAY_UserSize(     unsigned long *, unsigned long            , LPSAFEARRAY * ); 
+unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal(  unsigned long *, unsigned char *, LPSAFEARRAY * ); 
+unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal(unsigned long *, unsigned char *, LPSAFEARRAY * ); 
+void                      __RPC_USER  LPSAFEARRAY_UserFree(     unsigned long *, LPSAFEARRAY * ); 
+
 unsigned long             __RPC_USER  BSTR_UserSize64(     unsigned long *, unsigned long            , BSTR * ); 
 unsigned char * __RPC_USER  BSTR_UserMarshal64(  unsigned long *, unsigned char *, BSTR * ); 
 unsigned char * __RPC_USER  BSTR_UserUnmarshal64(unsigned long *, unsigned char *, BSTR * ); 
 void                      __RPC_USER  BSTR_UserFree64(     unsigned long *, BSTR * ); 
+
+unsigned long             __RPC_USER  LPSAFEARRAY_UserSize64(     unsigned long *, unsigned long            , LPSAFEARRAY * ); 
+unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal64(  unsigned long *, unsigned char *, LPSAFEARRAY * ); 
+unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal64(unsigned long *, unsigned char *, LPSAFEARRAY * ); 
+void                      __RPC_USER  LPSAFEARRAY_UserFree64(     unsigned long *, LPSAFEARRAY * ); 
 
 /* end of Additional Prototypes */
 

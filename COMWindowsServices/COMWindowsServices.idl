@@ -17,8 +17,9 @@ import "ocidl.idl";
 interface IServiceHandler : IDispatch
 {
 	[id(1)] HRESULT GetServices([out] SAFEARRAY(BSTR)* pOut, [out] LPDWORD dwServicesReturned);
-	[id(2)] HRESULT ServiceStart([in] BSTR serviceName, [in] LONG timeout);
+	[id(2)] HRESULT ServiceStart([in] BSTR serviceName);
 
+	[id(3)] HRESULT ServiceCurrentState([in] BSTR serviceName, [in, out] LPDWORD dwCurrentState);
 };
 [
 	uuid(50150657-f850-49cc-8f8e-780e36172742),

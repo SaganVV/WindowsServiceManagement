@@ -54,8 +54,9 @@ public:
 
 
 	STDMETHOD(GetServices)(SAFEARRAY** pOut, LPDWORD dwServicesReturned);
-	STDMETHOD(ServiceStart)(BSTR serviceName, LONG timeout);
+	STDMETHOD(ServiceStart)(BSTR serviceName);
 
+	STDMETHOD(ServiceCurrentState)(BSTR serviceName, LPDWORD dwCurrentState);
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(ServiceHandler), CServiceHandler)

@@ -101,8 +101,11 @@ EXTERN_C const IID IID_IServiceHandler;
             /* [out] */ LPDWORD dwServicesReturned) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ServiceStart( 
+            /* [in] */ BSTR serviceName) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ServiceCurrentState( 
             /* [in] */ BSTR serviceName,
-            /* [in] */ LONG timeout) = 0;
+            /* [out][in] */ LPDWORD dwCurrentState) = 0;
         
     };
     
@@ -178,8 +181,13 @@ EXTERN_C const IID IID_IServiceHandler;
         DECLSPEC_XFGVIRT(IServiceHandler, ServiceStart)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ServiceStart )( 
             IServiceHandler * This,
+            /* [in] */ BSTR serviceName);
+        
+        DECLSPEC_XFGVIRT(IServiceHandler, ServiceCurrentState)
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ServiceCurrentState )( 
+            IServiceHandler * This,
             /* [in] */ BSTR serviceName,
-            /* [in] */ LONG timeout);
+            /* [out][in] */ LPDWORD dwCurrentState);
         
         END_INTERFACE
     } IServiceHandlerVtbl;
@@ -220,8 +228,11 @@ EXTERN_C const IID IID_IServiceHandler;
 #define IServiceHandler_GetServices(This,pOut,dwServicesReturned)	\
     ( (This)->lpVtbl -> GetServices(This,pOut,dwServicesReturned) ) 
 
-#define IServiceHandler_ServiceStart(This,serviceName,timeout)	\
-    ( (This)->lpVtbl -> ServiceStart(This,serviceName,timeout) ) 
+#define IServiceHandler_ServiceStart(This,serviceName)	\
+    ( (This)->lpVtbl -> ServiceStart(This,serviceName) ) 
+
+#define IServiceHandler_ServiceCurrentState(This,serviceName,dwCurrentState)	\
+    ( (This)->lpVtbl -> ServiceCurrentState(This,serviceName,dwCurrentState) ) 
 
 #endif /* COBJMACROS */
 

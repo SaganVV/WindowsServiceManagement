@@ -132,9 +132,15 @@ STDMETHODIMP CServiceHandler::ServiceCurrentState(BSTR serviceName, LPDWORD dwCu
 
 STDMETHODIMP CServiceHandler::ServiceStop(BSTR serviceName)
 {
-    return S_OK;
-}
 
+    //HRESULT hr = ControlServiceRequest(serviceName, SERVICE_CONTROL_STOP);
+    //
+    //if (FAILED(hr))
+    //    return hr;
+    //hr = WaitForServiceStatus(serviceName, SERVICE_STOPPED, 30000);
+    //return hr;
+    return ControlService(serviceName, SERVICE_CONTROL_STOP, SERVICE_STOPPED, 30000);
+}
 
 STDMETHODIMP CServiceHandler::ServicePause(BSTR serviceName)
 {

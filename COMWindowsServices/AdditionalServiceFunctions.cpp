@@ -68,3 +68,50 @@ HRESULT WaitForServiceStatus(BSTR serviceName, DWORD dwDesiredState, DWORD dwTim
     CloseServiceHandle(hSCManager);
     return S_OK;
 }
+
+HRESULT ControlServiceRequest(BSTR serviceName, DWORD dwControlCode)
+{
+    SC_HANDLE hSCManager = OpenSCManager(NULL, NULL, SC_MANAGER_CONNECT);
+    if (!hSCManager)
+    {
+
+        return HRESULT_FROM_WIN32(GetLastError());
+    }
+
+    SC_HANDLE hService = OpenService(hSCManager, serviceName, SERVICE_QUERY_STATUS | SERVICE_STOP | SERVICE_START | SERVICE_PAUSE_CONTINUE | SERVICE_INTERROGATE | SERVICE_USER_DEFINED_CONTROL);
+    if (!hService)
+    {
+        CloseServiceHandle(hSCManager);
+        return HRESULT_FROM_WIN32(GetLastError());
+    }
+
+    SERVICE_STATUS_PROCESS ssStatus;
+    DWORD dwBytesNeeded = 0;
+
+    if (!QueryServiceStatusEx(hService, SC_STATUS_PROCESS_INFO, (LPBYTE)&ssStatus, sizeof(SERVICE_STATUS_PROCESS), &dwBytesNeeded))
+    {
+        CloseServiceHandle(hService);
+        CloseServiceHandle(hSCManager);
+        return HRESULT_FROM_WIN32(GetLastError());
+    }
+    if (!ControlService(hService, dwControlCode, (LPSERVICE_STATUS)&ssStatus))
+    {
+        CloseServiceHandle(hService);
+        CloseServiceHandle(hSCManager);
+        return HRESULT_FROM_WIN32(GetLastError());
+    }
+    
+    return S_OK;
+}
+
+HRESULT ControlService(BSTR serviceName, DWORD dwControlCode, DWORD dwDesiredState, DWORD dwTimeout)
+{
+    HRESULT hr = ControlServiceRequest(serviceName, dwControlCode);
+
+    if (FAILED(hr))
+        return hr;
+ 
+    hr = WaitForServiceStatus(serviceName, dwDesiredState, dwTimeout);
+    return hr;
+
+}

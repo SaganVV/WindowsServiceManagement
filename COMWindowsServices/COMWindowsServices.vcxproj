@@ -226,6 +226,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AdditionalServiceFunctions.h" />
     <ClInclude Include="COMWindowsServices_i.h" />
     <ClInclude Include="dllmain.h" />
     <ClInclude Include="framework.h" />
@@ -236,6 +237,7 @@
     <ClInclude Include="xdlldata.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AdditionalServiceFunctions.cpp" />
     <ClCompile Include="COMWindowsServices.cpp" />
     <ClCompile Include="COMWindowsServices_i.c">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>

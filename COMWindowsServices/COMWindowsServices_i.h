@@ -107,6 +107,15 @@ EXTERN_C const IID IID_IServiceHandler;
             /* [in] */ BSTR serviceName,
             /* [out][in] */ LPDWORD dwCurrentState) = 0;
         
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ServiceStop( 
+            /* [in] */ BSTR serviceName) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ServicePause( 
+            /* [in] */ BSTR serviceName) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ServiceResume( 
+            /* [in] */ BSTR serviceName) = 0;
+        
     };
     
     
@@ -189,6 +198,21 @@ EXTERN_C const IID IID_IServiceHandler;
             /* [in] */ BSTR serviceName,
             /* [out][in] */ LPDWORD dwCurrentState);
         
+        DECLSPEC_XFGVIRT(IServiceHandler, ServiceStop)
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ServiceStop )( 
+            IServiceHandler * This,
+            /* [in] */ BSTR serviceName);
+        
+        DECLSPEC_XFGVIRT(IServiceHandler, ServicePause)
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ServicePause )( 
+            IServiceHandler * This,
+            /* [in] */ BSTR serviceName);
+        
+        DECLSPEC_XFGVIRT(IServiceHandler, ServiceResume)
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ServiceResume )( 
+            IServiceHandler * This,
+            /* [in] */ BSTR serviceName);
+        
         END_INTERFACE
     } IServiceHandlerVtbl;
 
@@ -233,6 +257,15 @@ EXTERN_C const IID IID_IServiceHandler;
 
 #define IServiceHandler_ServiceCurrentState(This,serviceName,dwCurrentState)	\
     ( (This)->lpVtbl -> ServiceCurrentState(This,serviceName,dwCurrentState) ) 
+
+#define IServiceHandler_ServiceStop(This,serviceName)	\
+    ( (This)->lpVtbl -> ServiceStop(This,serviceName) ) 
+
+#define IServiceHandler_ServicePause(This,serviceName)	\
+    ( (This)->lpVtbl -> ServicePause(This,serviceName) ) 
+
+#define IServiceHandler_ServiceResume(This,serviceName)	\
+    ( (This)->lpVtbl -> ServiceResume(This,serviceName) ) 
 
 #endif /* COBJMACROS */
 

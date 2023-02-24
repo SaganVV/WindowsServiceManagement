@@ -4,6 +4,7 @@
 //#include <iostream>
 #include "pch.h"
 #include "ServiceHandler.h"
+#include "AdditionalServiceFunctions.h"
 
 STDMETHODIMP CServiceHandler::GetServices(SAFEARRAY** pOut, LPDWORD dwServicesReturned)
 {
@@ -72,6 +73,7 @@ STDMETHODIMP CServiceHandler::GetServices(SAFEARRAY** pOut, LPDWORD dwServicesRe
 
 STDMETHODIMP CServiceHandler::ServiceStart(BSTR serviceName)
 {
+
     SC_HANDLE hSCManager = OpenSCManager(NULL, NULL, SC_MANAGER_CONNECT);
     if (!hSCManager)
     {
@@ -91,68 +93,12 @@ STDMETHODIMP CServiceHandler::ServiceStart(BSTR serviceName)
         CloseServiceHandle(hSCManager);
         return HRESULT_FROM_WIN32(GetLastError());
     }
-    SERVICE_STATUS_PROCESS ssStatus;
-    DWORD dwBytesNeeded = 0;
-
-    if (!QueryServiceStatusEx(hService, SC_STATUS_PROCESS_INFO, (LPBYTE) & ssStatus, sizeof(SERVICE_STATUS_PROCESS), &dwBytesNeeded))
-    {
-        CloseServiceHandle(hService);
-        CloseServiceHandle(hSCManager);
-        return HRESULT_FROM_WIN32(GetLastError());
-    }
-    if (ssStatus.dwCurrentState != SERVICE_STOP && ssStatus.dwCurrentState != SERVICE_STOP_PENDING)
-    {
-        CloseServiceHandle(hService);
-        CloseServiceHandle(hSCManager);
-        return S_OK;
-    }
-
-    DWORD dwStartTickCount = GetTickCount();
-    DWORD dwCheckPoint = 0;
-    DWORD dwOldCheckPoint = ssStatus.dwCheckPoint;
-    DWORD dwWaitTime = 0;
-
-    while (ssStatus.dwCurrentState != SERVICE_RUNNING)
-    {
-        dwWaitTime = ssStatus.dwWaitHint / 10;
-        if (dwWaitTime < 1000)
-            dwWaitTime = 1000;
-        else if (dwWaitTime > 10000)
-            dwWaitTime = 10000;
-
-        Sleep(dwWaitTime);
-        
-        if (!QueryServiceStatusEx(hService, SC_STATUS_PROCESS_INFO, (LPBYTE)&ssStatus, sizeof(SERVICE_STATUS_PROCESS), &dwBytesNeeded))
-        {
-            CloseServiceHandle(hService);
-            CloseServiceHandle(hSCManager);
-            return HRESULT_FROM_WIN32(GetLastError());
-        }
-        
-        if (ssStatus.dwCheckPoint > dwOldCheckPoint)
-        {
-            dwStartTickCount = GetTickCount();
-            dwOldCheckPoint = ssStatus.dwCheckPoint;
-        }
-        else
-        {
-            if (GetTickCount() - dwStartTickCount > ssStatus.dwWaitHint)
-            {
-                CloseServiceHandle(hService);
-                CloseServiceHandle(hSCManager);
-                return HRESULT_FROM_WIN32(ERROR_TIMEOUT);
-            }
-        }
-    }
-    
+    HRESULT hr = WaitForServiceStatus(serviceName, SERVICE_RUNNING, 30000);
     CloseServiceHandle(hService);
     CloseServiceHandle(hSCManager);
-    return S_OK;
-
+    return hr;
+   
 }
-
-
-
 
 STDMETHODIMP CServiceHandler::ServiceCurrentState(BSTR serviceName, LPDWORD dwCurrentState)
 {
@@ -181,4 +127,26 @@ STDMETHODIMP CServiceHandler::ServiceCurrentState(BSTR serviceName, LPDWORD dwCu
     CloseServiceHandle(hService);
     CloseServiceHandle(hSCManager);
     return S_OK;
+}
+
+
+STDMETHODIMP CServiceHandler::ServiceStop(BSTR serviceName)
+{
+    return S_OK;
+}
+
+
+STDMETHODIMP CServiceHandler::ServicePause(BSTR serviceName)
+{
+
+    return S_OK;
+
+}
+
+
+STDMETHODIMP CServiceHandler::ServiceResume(BSTR serviceName)
+{
+
+    return S_OK;
+
 }

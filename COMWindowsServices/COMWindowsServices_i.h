@@ -116,6 +116,13 @@ EXTERN_C const IID IID_IServiceHandler;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ServiceResume( 
             /* [in] */ BSTR serviceName) = 0;
         
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ServiceRestart( 
+            /* [in] */ BSTR serviceName) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ServiceControlsAccepted( 
+            /* [in] */ BSTR serviceName,
+            LPDWORD dwControlsAccepted) = 0;
+        
     };
     
     
@@ -213,6 +220,17 @@ EXTERN_C const IID IID_IServiceHandler;
             IServiceHandler * This,
             /* [in] */ BSTR serviceName);
         
+        DECLSPEC_XFGVIRT(IServiceHandler, ServiceRestart)
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ServiceRestart )( 
+            IServiceHandler * This,
+            /* [in] */ BSTR serviceName);
+        
+        DECLSPEC_XFGVIRT(IServiceHandler, ServiceControlsAccepted)
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ServiceControlsAccepted )( 
+            IServiceHandler * This,
+            /* [in] */ BSTR serviceName,
+            LPDWORD dwControlsAccepted);
+        
         END_INTERFACE
     } IServiceHandlerVtbl;
 
@@ -266,6 +284,12 @@ EXTERN_C const IID IID_IServiceHandler;
 
 #define IServiceHandler_ServiceResume(This,serviceName)	\
     ( (This)->lpVtbl -> ServiceResume(This,serviceName) ) 
+
+#define IServiceHandler_ServiceRestart(This,serviceName)	\
+    ( (This)->lpVtbl -> ServiceRestart(This,serviceName) ) 
+
+#define IServiceHandler_ServiceControlsAccepted(This,serviceName,dwControlsAccepted)	\
+    ( (This)->lpVtbl -> ServiceControlsAccepted(This,serviceName,dwControlsAccepted) ) 
 
 #endif /* COBJMACROS */
 

@@ -23,6 +23,8 @@ interface IServiceHandler : IDispatch
 	[id(4)] HRESULT ServiceStop([in] BSTR serviceName);
 	[id(5)] HRESULT ServicePause([in] BSTR serviceName);
 	[id(6)] HRESULT ServiceResume([in] BSTR serviceName);
+	[id(7)] HRESULT ServiceRestart([in] BSTR serviceName);
+	[id(8)] HRESULT ServiceControlsAccepted([in] BSTR serviceName, LPDWORD dwControlsAccepted);
 };
 [
 	uuid(50150657-f850-49cc-8f8e-780e36172742),

@@ -132,27 +132,58 @@ STDMETHODIMP CServiceHandler::ServiceCurrentState(BSTR serviceName, LPDWORD dwCu
 
 STDMETHODIMP CServiceHandler::ServiceStop(BSTR serviceName)
 {
-
-    //HRESULT hr = ControlServiceRequest(serviceName, SERVICE_CONTROL_STOP);
-    //
-    //if (FAILED(hr))
-    //    return hr;
-    //hr = WaitForServiceStatus(serviceName, SERVICE_STOPPED, 30000);
-    //return hr;
-    return ControlService(serviceName, SERVICE_CONTROL_STOP, SERVICE_STOPPED, 30000);
+    return ControlService(serviceName, SERVICE_CONTROL_STOP, SERVICE_STOPPED, cdwTimeout);
 }
 
 STDMETHODIMP CServiceHandler::ServicePause(BSTR serviceName)
 {
-
-    return S_OK;
-
+    return ControlService(serviceName, SERVICE_CONTROL_PAUSE, SERVICE_PAUSED, cdwTimeout);
 }
 
 
 STDMETHODIMP CServiceHandler::ServiceResume(BSTR serviceName)
 {
+    return ControlService(serviceName, SERVICE_CONTROL_CONTINUE, SERVICE_RUNNING, cdwTimeout);
+}
 
+
+STDMETHODIMP CServiceHandler::ServiceRestart(BSTR serviceName)
+{
+
+    HRESULT hr = ServiceStop(serviceName);
+    if (FAILED(hr))
+        return hr;
+    hr = ServiceStart(serviceName);
+    return hr;
+}
+
+
+STDMETHODIMP CServiceHandler::ServiceControlsAccepted(BSTR serviceName, LPDWORD dwControlsAccepted)
+{
+    SC_HANDLE hSCManager = OpenSCManager(NULL, NULL, SC_MANAGER_CONNECT);
+    if (!hSCManager)
+    {
+
+        return HRESULT_FROM_WIN32(GetLastError());
+    }
+
+    SC_HANDLE hService = OpenService(hSCManager, serviceName, SERVICE_QUERY_STATUS);
+    if (!hService)
+    {
+        CloseHandle(hSCManager);
+        return HRESULT_FROM_WIN32(GetLastError());
+    }
+    SERVICE_STATUS_PROCESS ssStatus;
+    DWORD dwBytesNeeded;
+    if (!QueryServiceStatusEx(hService, SC_STATUS_PROCESS_INFO, (LPBYTE)&ssStatus, sizeof(SERVICE_STATUS_PROCESS), &dwBytesNeeded))
+    {
+        CloseServiceHandle(hService);
+        CloseServiceHandle(hSCManager);
+        return HRESULT_FROM_WIN32(GetLastError());
+    }
+    *dwControlsAccepted = ssStatus.dwControlsAccepted;
+    CloseServiceHandle(hService);
+    CloseServiceHandle(hSCManager);
+   
     return S_OK;
-
 }

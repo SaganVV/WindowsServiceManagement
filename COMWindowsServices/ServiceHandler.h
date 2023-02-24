@@ -60,6 +60,8 @@ public:
 	STDMETHOD(ServiceStop)(BSTR serviceName);
 	STDMETHOD(ServicePause)(BSTR serviceName);
 	STDMETHOD(ServiceResume)(BSTR serviceName);
+	STDMETHOD(ServiceRestart)(BSTR serviceName);
+	STDMETHOD(ServiceControlsAccepted)(BSTR serviceName, LPDWORD dwControlsAccepted);
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(ServiceHandler), CServiceHandler)

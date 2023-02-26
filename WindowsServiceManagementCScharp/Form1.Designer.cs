@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvServices = new System.Windows.Forms.DataGridView();
             this.ServiceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ServiceState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelContent = new System.Windows.Forms.Panel();
             this.txtbServiceName = new System.Windows.Forms.TextBox();
-            this.btnFindService = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
             this.btnContinue = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
+            this.btnFindService = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvServices)).BeginInit();
             this.panelContent.SuspendLayout();
             this.SuspendLayout();
@@ -53,24 +53,25 @@
             this.dgvServices.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvServices.BackgroundColor = System.Drawing.Color.White;
             this.dgvServices.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvServices.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvServices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvServices.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ServiceName,
             this.ServiceState});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvServices.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvServices.DefaultCellStyle = dataGridViewCellStyle15;
             this.dgvServices.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvServices.Location = new System.Drawing.Point(199, 86);
+            this.dgvServices.Location = new System.Drawing.Point(15, 42);
+            this.dgvServices.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvServices.MultiSelect = false;
             this.dgvServices.Name = "dgvServices";
             this.dgvServices.ReadOnly = true;
-            this.dgvServices.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dgvServices.RowHeadersVisible = false;
             this.dgvServices.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
             this.dgvServices.RowTemplate.Height = 24;
@@ -106,39 +107,33 @@
             this.panelContent.Controls.Add(this.dgvServices);
             this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContent.Location = new System.Drawing.Point(0, 0);
+            this.panelContent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(982, 584);
+            this.panelContent.Size = new System.Drawing.Size(591, 414);
             this.panelContent.TabIndex = 3;
             this.panelContent.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContent_Paint);
             // 
             // txtbServiceName
             // 
-            this.txtbServiceName.Location = new System.Drawing.Point(199, 28);
+            this.txtbServiceName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbServiceName.Location = new System.Drawing.Point(15, 12);
+            this.txtbServiceName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtbServiceName.MaxLength = 50;
             this.txtbServiceName.Name = "txtbServiceName";
-            this.txtbServiceName.Size = new System.Drawing.Size(264, 22);
+            this.txtbServiceName.Size = new System.Drawing.Size(313, 26);
             this.txtbServiceName.TabIndex = 8;
             this.txtbServiceName.TextChanged += new System.EventHandler(this.txtbServiceName_TextChanged);
             // 
-            // btnFindService
-            // 
-            this.btnFindService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnFindService.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnFindService.Location = new System.Drawing.Point(485, 21);
-            this.btnFindService.Name = "btnFindService";
-            this.btnFindService.Size = new System.Drawing.Size(85, 36);
-            this.btnFindService.TabIndex = 7;
-            this.btnFindService.Text = "Find";
-            this.btnFindService.UseVisualStyleBackColor = false;
-            this.btnFindService.Click += new System.EventHandler(this.btnFindService_Click);
-            // 
             // btnRefresh
             // 
-            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnRefresh.Location = new System.Drawing.Point(674, 21);
+            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefresh.Location = new System.Drawing.Point(490, 12);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(85, 36);
+            this.btnRefresh.Size = new System.Drawing.Size(85, 26);
             this.btnRefresh.TabIndex = 5;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = false;
@@ -146,11 +141,12 @@
             // 
             // btnStop
             // 
-            this.btnStop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnStop.Location = new System.Drawing.Point(674, 449);
+            this.btnStop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnStop.Location = new System.Drawing.Point(105, 373);
+            this.btnStop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(85, 36);
+            this.btnStop.Size = new System.Drawing.Size(85, 31);
             this.btnStop.TabIndex = 4;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = false;
@@ -158,11 +154,12 @@
             // 
             // btnPause
             // 
-            this.btnPause.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnPause.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnPause.Location = new System.Drawing.Point(519, 449);
+            this.btnPause.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnPause.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPause.Location = new System.Drawing.Point(287, 373);
+            this.btnPause.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPause.Name = "btnPause";
-            this.btnPause.Size = new System.Drawing.Size(85, 36);
+            this.btnPause.Size = new System.Drawing.Size(85, 31);
             this.btnPause.TabIndex = 3;
             this.btnPause.Text = "Pause";
             this.btnPause.UseVisualStyleBackColor = false;
@@ -170,11 +167,12 @@
             // 
             // btnContinue
             // 
-            this.btnContinue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnContinue.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnContinue.Location = new System.Drawing.Point(359, 449);
+            this.btnContinue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnContinue.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnContinue.Location = new System.Drawing.Point(196, 373);
+            this.btnContinue.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnContinue.Name = "btnContinue";
-            this.btnContinue.Size = new System.Drawing.Size(85, 36);
+            this.btnContinue.Size = new System.Drawing.Size(85, 31);
             this.btnContinue.TabIndex = 2;
             this.btnContinue.Text = "Continue";
             this.btnContinue.UseVisualStyleBackColor = false;
@@ -183,27 +181,44 @@
             // btnStart
             // 
             this.btnStart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnStart.Location = new System.Drawing.Point(199, 449);
+            this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnStart.Location = new System.Drawing.Point(15, 373);
+            this.btnStart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(85, 36);
+            this.btnStart.Size = new System.Drawing.Size(85, 31);
             this.btnStart.TabIndex = 1;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // btnFindService
+            // 
+            this.btnFindService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnFindService.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnFindService.FlatAppearance.BorderSize = 0;
+            this.btnFindService.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnFindService.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFindService.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnFindService.Location = new System.Drawing.Point(336, 12);
+            this.btnFindService.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnFindService.Name = "btnFindService";
+            this.btnFindService.Size = new System.Drawing.Size(85, 26);
+            this.btnFindService.TabIndex = 7;
+            this.btnFindService.Text = "Find";
+            this.btnFindService.UseVisualStyleBackColor = false;
+            this.btnFindService.Click += new System.EventHandler(this.btnFindService_Click);
             // 
             // FormMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(982, 584);
+            this.ClientSize = new System.Drawing.Size(591, 414);
             this.Controls.Add(this.panelContent);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximumSize = new System.Drawing.Size(1000, 631);
-            this.MinimumSize = new System.Drawing.Size(1000, 631);
+            this.MaximumSize = new System.Drawing.Size(999, 629);
             this.Name = "FormMainMenu";
             this.Text = "Service Management";
             this.Load += new System.EventHandler(this.FormMainMenu_Load);
@@ -215,7 +230,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView dgvServices;
         private System.Windows.Forms.Panel panelContent;
         private System.Windows.Forms.DataGridViewTextBoxColumn ServiceName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ServiceState;
@@ -224,8 +238,9 @@
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnPause;
         private System.Windows.Forms.Button btnContinue;
-        private System.Windows.Forms.Button btnFindService;
         private System.Windows.Forms.TextBox txtbServiceName;
+        private System.Windows.Forms.DataGridView dgvServices;
+        private System.Windows.Forms.Button btnFindService;
     }
 }
 

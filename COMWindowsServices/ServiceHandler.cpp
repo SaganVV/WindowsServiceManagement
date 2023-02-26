@@ -71,35 +71,6 @@ STDMETHODIMP CServiceHandler::GetServices(SAFEARRAY** pOut, LPDWORD dwServicesRe
     return S_OK;
 }
 
-STDMETHODIMP CServiceHandler::ServiceStart(BSTR serviceName)
-{
-
-    SC_HANDLE hSCManager = OpenSCManager(NULL, NULL, SC_MANAGER_CONNECT);
-    if (!hSCManager)
-    {
-        
-        return HRESULT_FROM_WIN32(GetLastError());
-    }
-    
-    SC_HANDLE hService = OpenService(hSCManager, serviceName, SERVICE_START | SERVICE_QUERY_STATUS);
-    if (!hService)
-    {
-        CloseServiceHandle(hSCManager);
-        return HRESULT_FROM_WIN32(GetLastError());
-    }
-    if (!StartService(hService, 0, NULL))
-    {
-        CloseServiceHandle(hService);
-        CloseServiceHandle(hSCManager);
-        return HRESULT_FROM_WIN32(GetLastError());
-    }
-    HRESULT hr = WaitForServiceStatus(serviceName, SERVICE_RUNNING, 30000);
-    CloseServiceHandle(hService);
-    CloseServiceHandle(hSCManager);
-    return hr;
-   
-}
-
 STDMETHODIMP CServiceHandler::ServiceCurrentState(BSTR serviceName, LPDWORD dwCurrentState)
 {
     SC_HANDLE hSCManager = OpenSCManager(NULL, NULL, SC_MANAGER_CONNECT);
@@ -129,6 +100,68 @@ STDMETHODIMP CServiceHandler::ServiceCurrentState(BSTR serviceName, LPDWORD dwCu
     return S_OK;
 }
 
+STDMETHODIMP CServiceHandler::ServiceControlsAccepted(BSTR serviceName, LPDWORD dwControlsAccepted)
+{
+    SC_HANDLE hSCManager = OpenSCManager(NULL, NULL, SC_MANAGER_CONNECT);
+    if (!hSCManager)
+    {
+
+        return HRESULT_FROM_WIN32(GetLastError());
+    }
+
+    SC_HANDLE hService = OpenService(hSCManager, serviceName, SERVICE_QUERY_STATUS);
+    if (!hService)
+    {
+        CloseHandle(hSCManager);
+        return HRESULT_FROM_WIN32(GetLastError());
+    }
+    SERVICE_STATUS_PROCESS ssStatus;
+    DWORD dwBytesNeeded;
+    if (!QueryServiceStatusEx(hService, SC_STATUS_PROCESS_INFO, (LPBYTE)&ssStatus, sizeof(SERVICE_STATUS_PROCESS), &dwBytesNeeded))
+    {
+        CloseServiceHandle(hService);
+        CloseServiceHandle(hSCManager);
+        return HRESULT_FROM_WIN32(GetLastError());
+    }
+    *dwControlsAccepted = ssStatus.dwControlsAccepted;
+    CloseServiceHandle(hService);
+    CloseServiceHandle(hSCManager);
+
+    return S_OK;
+}
+
+
+STDMETHODIMP CServiceHandler::ServiceStart(BSTR serviceName)
+{
+
+    SC_HANDLE hSCManager = OpenSCManager(NULL, NULL, SC_MANAGER_CONNECT);
+    HRESULT hr = S_OK;
+
+    if (!hSCManager)
+    {
+
+        return HRESULT_FROM_WIN32(GetLastError());
+    }
+
+    SC_HANDLE hService = OpenService(hSCManager, serviceName, SERVICE_START | SERVICE_QUERY_STATUS);
+    if (!hService)
+    {
+        CloseServiceHandle(hSCManager);
+        return HRESULT_FROM_WIN32(GetLastError());
+    }
+    if (!StartService(hService, 0, NULL))
+    {
+        CloseServiceHandle(hService);
+        CloseServiceHandle(hSCManager);
+        return HRESULT_FROM_WIN32(GetLastError());
+    }
+
+    HRESULT hr = WaitForServiceStatus(serviceName, SERVICE_RUNNING, 30000);
+    CloseServiceHandle(hService);
+    CloseServiceHandle(hSCManager);
+    return hr;
+
+}
 
 STDMETHODIMP CServiceHandler::ServiceStop(BSTR serviceName)
 {
@@ -158,32 +191,3 @@ STDMETHODIMP CServiceHandler::ServiceRestart(BSTR serviceName)
 }
 
 
-STDMETHODIMP CServiceHandler::ServiceControlsAccepted(BSTR serviceName, LPDWORD dwControlsAccepted)
-{
-    SC_HANDLE hSCManager = OpenSCManager(NULL, NULL, SC_MANAGER_CONNECT);
-    if (!hSCManager)
-    {
-
-        return HRESULT_FROM_WIN32(GetLastError());
-    }
-
-    SC_HANDLE hService = OpenService(hSCManager, serviceName, SERVICE_QUERY_STATUS);
-    if (!hService)
-    {
-        CloseHandle(hSCManager);
-        return HRESULT_FROM_WIN32(GetLastError());
-    }
-    SERVICE_STATUS_PROCESS ssStatus;
-    DWORD dwBytesNeeded;
-    if (!QueryServiceStatusEx(hService, SC_STATUS_PROCESS_INFO, (LPBYTE)&ssStatus, sizeof(SERVICE_STATUS_PROCESS), &dwBytesNeeded))
-    {
-        CloseServiceHandle(hService);
-        CloseServiceHandle(hSCManager);
-        return HRESULT_FROM_WIN32(GetLastError());
-    }
-    *dwControlsAccepted = ssStatus.dwControlsAccepted;
-    CloseServiceHandle(hService);
-    CloseServiceHandle(hSCManager);
-   
-    return S_OK;
-}

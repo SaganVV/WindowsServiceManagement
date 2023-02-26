@@ -7,8 +7,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "COMWindowsServices", "COMWi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "COMWindowsServicesTest", "COMWindowsServicesTest\COMWindowsServicesTest.vcxproj", "{5D0336B5-AABA-4991-959D-2A6F4DE5E61B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WindowsServiceManagementGUI", "WindowsServiceManagementGUI\WindowsServiceManagementGUI.vcxproj", "{2E638CF5-D165-4F91-BC7C-514DC7805E54}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsServiceManagementCScharp", "WindowsServiceManagementCScharp\WindowsServiceManagementCScharp.csproj", "{FF83EA31-975A-400F-9779-CEC9C7033D00}"
 EndProject
 Global
@@ -45,18 +43,6 @@ Global
 		{5D0336B5-AABA-4991-959D-2A6F4DE5E61B}.Release|x64.Build.0 = Release|x64
 		{5D0336B5-AABA-4991-959D-2A6F4DE5E61B}.Release|x86.ActiveCfg = Release|Win32
 		{5D0336B5-AABA-4991-959D-2A6F4DE5E61B}.Release|x86.Build.0 = Release|Win32
-		{2E638CF5-D165-4F91-BC7C-514DC7805E54}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{2E638CF5-D165-4F91-BC7C-514DC7805E54}.Debug|Any CPU.Build.0 = Debug|x64
-		{2E638CF5-D165-4F91-BC7C-514DC7805E54}.Debug|x64.ActiveCfg = Debug|x64
-		{2E638CF5-D165-4F91-BC7C-514DC7805E54}.Debug|x64.Build.0 = Debug|x64
-		{2E638CF5-D165-4F91-BC7C-514DC7805E54}.Debug|x86.ActiveCfg = Debug|Win32
-		{2E638CF5-D165-4F91-BC7C-514DC7805E54}.Debug|x86.Build.0 = Debug|Win32
-		{2E638CF5-D165-4F91-BC7C-514DC7805E54}.Release|Any CPU.ActiveCfg = Release|x64
-		{2E638CF5-D165-4F91-BC7C-514DC7805E54}.Release|Any CPU.Build.0 = Release|x64
-		{2E638CF5-D165-4F91-BC7C-514DC7805E54}.Release|x64.ActiveCfg = Release|x64
-		{2E638CF5-D165-4F91-BC7C-514DC7805E54}.Release|x64.Build.0 = Release|x64
-		{2E638CF5-D165-4F91-BC7C-514DC7805E54}.Release|x86.ActiveCfg = Release|Win32
-		{2E638CF5-D165-4F91-BC7C-514DC7805E54}.Release|x86.Build.0 = Release|Win32
 		{FF83EA31-975A-400F-9779-CEC9C7033D00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FF83EA31-975A-400F-9779-CEC9C7033D00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF83EA31-975A-400F-9779-CEC9C7033D00}.Debug|x64.ActiveCfg = Debug|Any CPU

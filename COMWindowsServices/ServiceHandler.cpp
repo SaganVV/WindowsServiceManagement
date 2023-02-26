@@ -5,10 +5,11 @@
 #include "pch.h"
 #include "ServiceHandler.h"
 #include "AdditionalServiceFunctions.h"
-
 #include <vector>
+
 STDMETHODIMP CServiceHandler::GetServices(SAFEARRAY** pOut, LPDWORD lpdwServicesReturned)
 {
+    HRESULT hr = S_OK;
     SC_HANDLE hSCManager = OpenSCManager(NULL, NULL, SC_MANAGER_ENUMERATE_SERVICE);
     if (!hSCManager)
     {
@@ -28,46 +29,29 @@ STDMETHODIMP CServiceHandler::GetServices(SAFEARRAY** pOut, LPDWORD lpdwServices
 
     std::vector<ENUM_SERVICE_STATUS> services(*lpdwServicesReturned);
     LPENUM_SERVICE_STATUS lpServices = services.data();
-
-    if (!EnumServicesStatus(hSCManager, SERVICE_WIN32, SERVICE_STATE_ALL, lpServices, dwBytesNeeded, &dwBytesNeeded, lpdwServicesReturned, &dwResumeHandle))
-    {       
-        CloseServiceHandle(hSCManager);
-        return HRESULT_FROM_WIN32(GetLastError());
-    }
-
+    
+    EnumServicesStatus(hSCManager, SERVICE_WIN32, SERVICE_STATE_ALL, lpServices, dwBytesNeeded, &dwBytesNeeded, lpdwServicesReturned, &dwResumeHandle);
+    
     SAFEARRAY* pServicesArray = SafeArrayCreateVector(VT_BSTR, 0, *lpdwServicesReturned);
+
     if (!pServicesArray)
     {
-        free(lpServices);
-        CloseServiceHandle(hSCManager);
-        return E_OUTOFMEMORY;
+        hr = E_OUTOFMEMORY;
+        goto cleanup;
     }
 
-    for (DWORD i = 0; i < *lpdwServicesReturned; i++)
+    hr = ServiceNamesToSafeArray(lpServices, *lpdwServicesReturned, &pServicesArray);
+    if (FAILED(hr))
     {
-        BSTR serviceName = SysAllocString(lpServices[i].lpServiceName);
-        if (!serviceName)
-        {
-            CloseServiceHandle(hSCManager);
-            SafeArrayDestroy(pServicesArray);
-            return E_OUTOFMEMORY;
-        }
-
-        LONG index = i;
-        if (FAILED(SafeArrayPutElement(pServicesArray, &index, serviceName)))
-        {
-            SysFreeString(serviceName);
-            CloseServiceHandle(hSCManager);
-            SafeArrayDestroy(pServicesArray);
-            return E_FAIL;
-        }
+        SafeArrayDestroy(pServicesArray);
+        goto cleanup;
     }
-
-
-    CloseServiceHandle(hSCManager);
 
     *pOut = pServicesArray;
-    return S_OK;
+
+cleanup:
+    CloseServiceHandle(hSCManager);
+    return hr;
 }
 
 STDMETHODIMP CServiceHandler::GetDependentServices(BSTR serviceName, SAFEARRAY** pOut, LPDWORD lpdwServicesReturned)
@@ -184,7 +168,6 @@ STDMETHODIMP CServiceHandler::ServiceControlsAccepted(BSTR serviceName, LPDWORD 
     return S_OK;
 }
 
-
 STDMETHODIMP CServiceHandler::ServiceStart(BSTR serviceName)
 {
 
@@ -226,7 +209,6 @@ STDMETHODIMP CServiceHandler::ServicePause(BSTR serviceName)
 {
     return ControlService(serviceName, SERVICE_CONTROL_PAUSE, SERVICE_PAUSED, cdwTimeout);
 }
-
 
 STDMETHODIMP CServiceHandler::ServiceResume(BSTR serviceName)
 {

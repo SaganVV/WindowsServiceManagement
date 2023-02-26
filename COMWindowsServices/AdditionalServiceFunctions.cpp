@@ -115,3 +115,32 @@ HRESULT ControlService(BSTR serviceName, DWORD dwControlCode, DWORD dwDesiredSta
     return hr;
 
 }
+
+HRESULT ServiceNamesToSafeArray(LPENUM_SERVICE_STATUS lpServices, DWORD dwServices, SAFEARRAY ** pOut)
+{ 
+    SAFEARRAY * pServicesArray = SafeArrayCreateVector(VT_BSTR, 0, dwServices);
+    if (!pServicesArray)
+    {
+        return E_OUTOFMEMORY;
+    }
+
+    for (DWORD i = 0; i < dwServices; i++)
+    {
+        BSTR serviceName = SysAllocString(lpServices[i].lpServiceName);
+        if (!serviceName)
+        {
+            SafeArrayDestroy(pServicesArray);
+            return E_OUTOFMEMORY;
+        }
+
+        LONG index = i;
+        if (FAILED(SafeArrayPutElement(pServicesArray, &index, serviceName)))
+        {
+            SysFreeString(serviceName);
+            SafeArrayDestroy(pServicesArray);
+            return E_FAIL;
+        }
+    }
+    *pOut = pServicesArray;
+    return S_OK;
+}

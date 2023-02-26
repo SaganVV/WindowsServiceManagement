@@ -16,15 +16,16 @@ import "ocidl.idl";
 ]
 interface IServiceHandler : IDispatch
 {
-	[id(1)] HRESULT GetServices([out] SAFEARRAY(BSTR)* pOut, [out] LPDWORD dwServicesReturned);
+	[id(1)] HRESULT GetServices([out] SAFEARRAY(BSTR)* pOut, [out] LPDWORD lpdwServicesReturned);
 	[id(2)] HRESULT ServiceStart([in] BSTR serviceName);
 
-	[id(3)] HRESULT ServiceCurrentState([in] BSTR serviceName, [in, out] LPDWORD dwCurrentState);
+	[id(3)] HRESULT ServiceCurrentState([in] BSTR serviceName, [out] LPDWORD dwCurrentState);
 	[id(4)] HRESULT ServiceStop([in] BSTR serviceName);
 	[id(5)] HRESULT ServicePause([in] BSTR serviceName);
 	[id(6)] HRESULT ServiceResume([in] BSTR serviceName);
 	[id(7)] HRESULT ServiceRestart([in] BSTR serviceName);
-	[id(8)] HRESULT ServiceControlsAccepted([in] BSTR serviceName, LPDWORD dwControlsAccepted);
+	[id(8)] HRESULT ServiceControlsAccepted([in] BSTR serviceName, [out] LPDWORD dwControlsAccepted);
+	[id(9)] HRESULT GetDependentServices([in] BSTR serviceName, [out] SAFEARRAY(BSTR)* pOut, [out] LPDWORD lpdwServicesReturned);
 };
 [
 	uuid(50150657-f850-49cc-8f8e-780e36172742),

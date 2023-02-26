@@ -3,8 +3,6 @@
 #pragma once
 #include "resource.h"       // main symbols
 
-
-
 #include "COMWindowsServices_i.h"
 
 
@@ -53,7 +51,7 @@ public:
 
 
 
-	STDMETHOD(GetServices)(SAFEARRAY** pOut, LPDWORD dwServicesReturned);
+	STDMETHOD(GetServices)(SAFEARRAY** pOut, LPDWORD lpdwServicesReturned);
 	STDMETHOD(ServiceStart)(BSTR serviceName);
 
 	STDMETHOD(ServiceCurrentState)(BSTR serviceName, LPDWORD dwCurrentState);
@@ -62,6 +60,7 @@ public:
 	STDMETHOD(ServiceResume)(BSTR serviceName);
 	STDMETHOD(ServiceRestart)(BSTR serviceName);
 	STDMETHOD(ServiceControlsAccepted)(BSTR serviceName, LPDWORD dwControlsAccepted);
+	STDMETHOD(GetDependentServices)(BSTR serviceName, SAFEARRAY** pOut, LPDWORD lpdwServicesReturned);
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(ServiceHandler), CServiceHandler)

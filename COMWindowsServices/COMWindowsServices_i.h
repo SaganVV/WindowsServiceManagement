@@ -7,8 +7,8 @@
 /* at Tue Jan 19 05:14:07 2038
  */
 /* Compiler settings for COMWindowsServices.idl:
-    Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 8.01.0626 
-    protocol : dce , ms_ext, c_ext, robust
+    Oicf, W1, Zp8, env=Win64 (32b run), target_arch=AMD64 8.01.0626 
+    protocol : all , ms_ext, c_ext, robust
     error checks: allocation ref bounds_check enum stub_data 
     VC __declspec() decoration level: 
          __declspec(uuid()), __declspec(selectany), __declspec(novtable)
@@ -98,14 +98,14 @@ EXTERN_C const IID IID_IServiceHandler;
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetServices( 
             /* [out] */ SAFEARRAY * *pOut,
-            /* [out] */ LPDWORD dwServicesReturned) = 0;
+            /* [out] */ LPDWORD lpdwServicesReturned) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ServiceStart( 
             /* [in] */ BSTR serviceName) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ServiceCurrentState( 
             /* [in] */ BSTR serviceName,
-            /* [out][in] */ LPDWORD dwCurrentState) = 0;
+            /* [out] */ LPDWORD dwCurrentState) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ServiceStop( 
             /* [in] */ BSTR serviceName) = 0;
@@ -121,7 +121,12 @@ EXTERN_C const IID IID_IServiceHandler;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ServiceControlsAccepted( 
             /* [in] */ BSTR serviceName,
-            LPDWORD dwControlsAccepted) = 0;
+            /* [out] */ LPDWORD dwControlsAccepted) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetDependentServices( 
+            /* [in] */ BSTR serviceName,
+            /* [out] */ SAFEARRAY * *pOut,
+            /* [out] */ LPDWORD lpdwServicesReturned) = 0;
         
     };
     
@@ -192,7 +197,7 @@ EXTERN_C const IID IID_IServiceHandler;
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetServices )( 
             IServiceHandler * This,
             /* [out] */ SAFEARRAY * *pOut,
-            /* [out] */ LPDWORD dwServicesReturned);
+            /* [out] */ LPDWORD lpdwServicesReturned);
         
         DECLSPEC_XFGVIRT(IServiceHandler, ServiceStart)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ServiceStart )( 
@@ -203,7 +208,7 @@ EXTERN_C const IID IID_IServiceHandler;
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ServiceCurrentState )( 
             IServiceHandler * This,
             /* [in] */ BSTR serviceName,
-            /* [out][in] */ LPDWORD dwCurrentState);
+            /* [out] */ LPDWORD dwCurrentState);
         
         DECLSPEC_XFGVIRT(IServiceHandler, ServiceStop)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ServiceStop )( 
@@ -229,7 +234,14 @@ EXTERN_C const IID IID_IServiceHandler;
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ServiceControlsAccepted )( 
             IServiceHandler * This,
             /* [in] */ BSTR serviceName,
-            LPDWORD dwControlsAccepted);
+            /* [out] */ LPDWORD dwControlsAccepted);
+        
+        DECLSPEC_XFGVIRT(IServiceHandler, GetDependentServices)
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDependentServices )( 
+            IServiceHandler * This,
+            /* [in] */ BSTR serviceName,
+            /* [out] */ SAFEARRAY * *pOut,
+            /* [out] */ LPDWORD lpdwServicesReturned);
         
         END_INTERFACE
     } IServiceHandlerVtbl;
@@ -267,8 +279,8 @@ EXTERN_C const IID IID_IServiceHandler;
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define IServiceHandler_GetServices(This,pOut,dwServicesReturned)	\
-    ( (This)->lpVtbl -> GetServices(This,pOut,dwServicesReturned) ) 
+#define IServiceHandler_GetServices(This,pOut,lpdwServicesReturned)	\
+    ( (This)->lpVtbl -> GetServices(This,pOut,lpdwServicesReturned) ) 
 
 #define IServiceHandler_ServiceStart(This,serviceName)	\
     ( (This)->lpVtbl -> ServiceStart(This,serviceName) ) 
@@ -290,6 +302,9 @@ EXTERN_C const IID IID_IServiceHandler;
 
 #define IServiceHandler_ServiceControlsAccepted(This,serviceName,dwControlsAccepted)	\
     ( (This)->lpVtbl -> ServiceControlsAccepted(This,serviceName,dwControlsAccepted) ) 
+
+#define IServiceHandler_GetDependentServices(This,serviceName,pOut,lpdwServicesReturned)	\
+    ( (This)->lpVtbl -> GetDependentServices(This,serviceName,pOut,lpdwServicesReturned) ) 
 
 #endif /* COBJMACROS */
 

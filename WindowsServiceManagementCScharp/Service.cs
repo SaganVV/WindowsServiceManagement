@@ -44,7 +44,7 @@ namespace WindowsServiceManagementCScharp
             {
                
                 uint _code = 0;
-                new ServiceHandler().ServiceCurrentState(Name, ref _code);
+                new ServiceHandler().ServiceCurrentState(Name, out _code);
                 return _code;
             }
         }
@@ -54,7 +54,7 @@ namespace WindowsServiceManagementCScharp
             {
                 
                 uint controlsAccepted = 0;
-                new ServiceHandler().ServiceControlsAccepted(Name, ref controlsAccepted);
+                new ServiceHandler().ServiceControlsAccepted(Name, out controlsAccepted);
                 return controlsAccepted;
             }
         }

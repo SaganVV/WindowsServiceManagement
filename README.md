@@ -18,7 +18,12 @@ To use this application, follow the steps below:
         2) Type the following command in the Command Prompt window:
       `regsvr32.exe //path/to/your/dllfile`
       
-2) Build the "WindowServiceManagementCSharpGUI" project using the same platform that you used for the COM setup.
+2) To set up "WindowsServiceManagementCSharpGUI", follow these steps.
+    1) Open "WindowsServiceManagementCSharpGUI" project
+    2) Add a reference to the COM library you created earlier
+    3) Build the "WindowsServiceManagementCSharpGUI" project using the same platform as the one you used for the COM setup.
+    
+3) Build the "WindowsServiceManagementCSharpGUI" project using the same platform that you used for the COM setup
 
 **Note:** For full functionality, it is recommended that you run the application with administrator privileges, as otherwise some features may be limited.
 

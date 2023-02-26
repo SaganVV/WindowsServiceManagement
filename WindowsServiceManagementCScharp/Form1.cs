@@ -197,5 +197,10 @@ namespace WindowsServiceManagementCScharp
         {
 
         }
+
+        private void txtbServiceName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

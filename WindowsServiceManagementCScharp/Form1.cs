@@ -187,5 +187,15 @@ namespace WindowsServiceManagementCScharp
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void panelContent_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void dgvServices_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

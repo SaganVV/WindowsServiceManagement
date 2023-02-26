@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvServices = new System.Windows.Forms.DataGridView();
             this.ServiceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ServiceState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelContent = new System.Windows.Forms.Panel();
             this.txtbServiceName = new System.Windows.Forms.TextBox();
+            this.btnFindService = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
             this.btnContinue = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
-            this.btnFindService = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvServices)).BeginInit();
             this.panelContent.SuspendLayout();
             this.SuspendLayout();
@@ -58,14 +58,14 @@
             this.dgvServices.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ServiceName,
             this.ServiceState});
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvServices.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvServices.DefaultCellStyle = dataGridViewCellStyle24;
             this.dgvServices.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvServices.Location = new System.Drawing.Point(15, 42);
             this.dgvServices.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -109,31 +109,48 @@
             this.panelContent.Location = new System.Drawing.Point(0, 0);
             this.panelContent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(591, 414);
+            this.panelContent.Size = new System.Drawing.Size(587, 423);
             this.panelContent.TabIndex = 3;
             this.panelContent.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContent_Paint);
             // 
             // txtbServiceName
             // 
-            this.txtbServiceName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbServiceName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtbServiceName.Location = new System.Drawing.Point(15, 12);
             this.txtbServiceName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtbServiceName.MaxLength = 50;
             this.txtbServiceName.Name = "txtbServiceName";
-            this.txtbServiceName.Size = new System.Drawing.Size(313, 26);
+            this.txtbServiceName.Size = new System.Drawing.Size(313, 24);
             this.txtbServiceName.TabIndex = 8;
             this.txtbServiceName.TextChanged += new System.EventHandler(this.txtbServiceName_TextChanged);
             // 
+            // btnFindService
+            // 
+            this.btnFindService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.btnFindService.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnFindService.FlatAppearance.BorderSize = 0;
+            this.btnFindService.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnFindService.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.btnFindService.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnFindService.Location = new System.Drawing.Point(336, 12);
+            this.btnFindService.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnFindService.Name = "btnFindService";
+            this.btnFindService.Size = new System.Drawing.Size(85, 24);
+            this.btnFindService.TabIndex = 7;
+            this.btnFindService.Text = "Find";
+            this.btnFindService.UseVisualStyleBackColor = false;
+            this.btnFindService.Click += new System.EventHandler(this.btnFindService_Click);
+            // 
             // btnRefresh
             // 
-            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.btnRefresh.Location = new System.Drawing.Point(490, 12);
             this.btnRefresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(85, 26);
+            this.btnRefresh.Size = new System.Drawing.Size(85, 24);
             this.btnRefresh.TabIndex = 5;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = false;
@@ -143,6 +160,7 @@
             // 
             this.btnStop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
             this.btnStop.Location = new System.Drawing.Point(105, 373);
             this.btnStop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStop.Name = "btnStop";
@@ -156,6 +174,7 @@
             // 
             this.btnPause.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.btnPause.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPause.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
             this.btnPause.Location = new System.Drawing.Point(287, 373);
             this.btnPause.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPause.Name = "btnPause";
@@ -169,6 +188,7 @@
             // 
             this.btnContinue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.btnContinue.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnContinue.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
             this.btnContinue.Location = new System.Drawing.Point(196, 373);
             this.btnContinue.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnContinue.Name = "btnContinue";
@@ -183,6 +203,7 @@
             this.btnStart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStart.Location = new System.Drawing.Point(15, 373);
             this.btnStart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStart.Name = "btnStart";
@@ -192,33 +213,19 @@
             this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // btnFindService
-            // 
-            this.btnFindService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.btnFindService.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnFindService.FlatAppearance.BorderSize = 0;
-            this.btnFindService.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnFindService.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFindService.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.btnFindService.Location = new System.Drawing.Point(336, 12);
-            this.btnFindService.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnFindService.Name = "btnFindService";
-            this.btnFindService.Size = new System.Drawing.Size(85, 26);
-            this.btnFindService.TabIndex = 7;
-            this.btnFindService.Text = "Find";
-            this.btnFindService.UseVisualStyleBackColor = false;
-            this.btnFindService.Click += new System.EventHandler(this.btnFindService_Click);
-            // 
             // FormMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(591, 414);
+            this.ClientSize = new System.Drawing.Size(587, 423);
             this.Controls.Add(this.panelContent);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximumSize = new System.Drawing.Size(999, 629);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(605, 470);
+            this.MinimumSize = new System.Drawing.Size(605, 470);
             this.Name = "FormMainMenu";
             this.Text = "Service Management";
             this.Load += new System.EventHandler(this.FormMainMenu_Load);

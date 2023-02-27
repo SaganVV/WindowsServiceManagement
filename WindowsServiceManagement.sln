@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsServiceManagementCSc
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCom", "TestCom\TestCom.vcxproj", "{D799E6C8-3CB7-468F-A745-B3BE5D55831C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEstComCs", "TEstComCs\TEstComCs.csproj", "{96BA395D-878F-465A-ADA4-58D777A820F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,18 @@ Global
 		{D799E6C8-3CB7-468F-A745-B3BE5D55831C}.Release|x64.Build.0 = Release|x64
 		{D799E6C8-3CB7-468F-A745-B3BE5D55831C}.Release|x86.ActiveCfg = Release|Win32
 		{D799E6C8-3CB7-468F-A745-B3BE5D55831C}.Release|x86.Build.0 = Release|Win32
+		{96BA395D-878F-465A-ADA4-58D777A820F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96BA395D-878F-465A-ADA4-58D777A820F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96BA395D-878F-465A-ADA4-58D777A820F7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{96BA395D-878F-465A-ADA4-58D777A820F7}.Debug|x64.Build.0 = Debug|Any CPU
+		{96BA395D-878F-465A-ADA4-58D777A820F7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{96BA395D-878F-465A-ADA4-58D777A820F7}.Debug|x86.Build.0 = Debug|Any CPU
+		{96BA395D-878F-465A-ADA4-58D777A820F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96BA395D-878F-465A-ADA4-58D777A820F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96BA395D-878F-465A-ADA4-58D777A820F7}.Release|x64.ActiveCfg = Release|Any CPU
+		{96BA395D-878F-465A-ADA4-58D777A820F7}.Release|x64.Build.0 = Release|Any CPU
+		{96BA395D-878F-465A-ADA4-58D777A820F7}.Release|x86.ActiveCfg = Release|Any CPU
+		{96BA395D-878F-465A-ADA4-58D777A820F7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

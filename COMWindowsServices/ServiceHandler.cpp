@@ -59,7 +59,6 @@ cleanup:
 STDMETHODIMP CServiceHandler::GetDependentServices(BSTR serviceName, SAFEARRAY** pOut, LPDWORD lpdwServicesReturned)
 {
     HRESULT hr = S_OK;
-    return hr;
     SC_HANDLE hSCManager = OpenSCManager(NULL, NULL, SC_MANAGER_CONNECT);
     if (!hSCManager)
     {
@@ -75,6 +74,7 @@ STDMETHODIMP CServiceHandler::GetDependentServices(BSTR serviceName, SAFEARRAY**
     if (EnumDependentServices(hService, SERVICE_ACTIVE, NULL, 0, &dwBytesNeeded, lpdwServicesReturned))
     {
         hr = S_OK;
+
         CloseServiceHandle(hSCManager);
         CloseServiceHandle(hService);
         return hr;
@@ -86,8 +86,7 @@ STDMETHODIMP CServiceHandler::GetDependentServices(BSTR serviceName, SAFEARRAY**
         CloseServiceHandle(hSCManager);
         return hr;
     }
-    //return S_OK;
-   // std::vector<ENUM_SERVICE_STATUS> services(*lpdwServicesReturned);
+
     LPENUM_SERVICE_STATUS lpServices = (LPENUM_SERVICE_STATUS)malloc(dwBytesNeeded);
 
     EnumDependentServices(hService, SERVICE_ACTIVE, lpServices, dwBytesNeeded, &dwBytesNeeded, lpdwServicesReturned);

@@ -93,6 +93,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
     <COMReference Include="COMWindowsServicesLib">
       <Guid>{50150657-F850-49CC-8F8E-780E36172742}</Guid>
       <VersionMajor>1</VersionMajor>

@@ -94,7 +94,10 @@ namespace WindowsServiceManagementCScharp
             uint serviceCount = 0;
             try
             {
+               
+                //new ServiceHandler().GetServices(out serviceNames, out serviceCount);
                 new ServiceHandler().GetDependentServices(serviceName,out serviceNames, out serviceCount);
+                //new ServiceHandler().GetDependentServices(serviceName,out serviceNames, out serviceCount);
                 Service[] services = new Service[serviceNames.Length];
                 for (int i = 0; i < serviceNames.Length; i++)
                 {

@@ -30,6 +30,7 @@ namespace WindowsServiceManagementCScharp
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             services = Service.GetDependentServicesNames(serviceName);
+           
             dgvServices.Rows.Clear();
             DataGridViewHandler.AddDataToGrid(dgvServices, DataGridViewHandler.ServicesToDataGridRowFormat(services));
             dgvServices.ClearSelection();

@@ -91,17 +91,18 @@ namespace WindowsServiceManagementCScharp
         public static Service[] GetDependentServicesNames(string serviceName)
         {
             Array serviceNames;
-            uint countServicesReturned;
+            uint serviceCount = 0;
             try
             {
-                new ServiceHandler().GetDependentServices(serviceName, out serviceNames, out countServicesReturned);
-                /*                Service[] services = new Service[serviceNames.Length];
-                                for (int i = 0; i < serviceNames.Length; i++)
-                                {
-                                    services[i] = new Service((string)serviceNames.GetValue(i));
-                                }
-                                return services;*/
-                return null;
+                new ServiceHandler().GetDependentServices(serviceName,out serviceNames, out serviceCount);
+                Service[] services = new Service[serviceNames.Length];
+                for (int i = 0; i < serviceNames.Length; i++)
+                {
+     
+                               services[i] = new Service((string)serviceNames.GetValue(i));
+                }
+                                return services;
+                return services ;
 
             }
             catch(Exception ex) { MessageBox.Show(ex.Message); return null; }

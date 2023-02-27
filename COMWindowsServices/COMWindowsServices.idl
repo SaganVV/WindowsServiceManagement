@@ -26,6 +26,7 @@ interface IServiceHandler : IDispatch
 	[id(7)] HRESULT ServiceRestart([in] BSTR serviceName);
 	[id(8)] HRESULT ServiceControlsAccepted([in] BSTR serviceName, [out] LPDWORD dwControlsAccepted);
 	[id(9)] HRESULT GetDependentServices([in] BSTR serviceName, [out] SAFEARRAY(BSTR)* pOut, [out] LPDWORD lpdwServicesReturned);
+	[id(10)] HRESULT StopDependentServices([in] BSTR serviceName);
 };
 [
 	uuid(50150657-f850-49cc-8f8e-780e36172742),

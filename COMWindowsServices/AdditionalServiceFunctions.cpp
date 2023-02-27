@@ -141,6 +141,7 @@ HRESULT ServiceNamesToSafeArray(LPENUM_SERVICE_STATUS lpServices, DWORD dwServic
             return E_FAIL;
         }
     }
+
     *pOut = pServicesArray;
     return S_OK;
 }

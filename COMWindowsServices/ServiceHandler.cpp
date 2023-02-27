@@ -202,7 +202,53 @@ STDMETHODIMP CServiceHandler::ServiceStart(BSTR serviceName)
 
 STDMETHODIMP CServiceHandler::ServiceStop(BSTR serviceName)
 {
+    StopDependentServices(serviceName);
     return ControlService(serviceName, SERVICE_CONTROL_STOP, SERVICE_STOPPED, cdwTimeout);
+}
+
+STDMETHODIMP CServiceHandler::StopDependentServices(BSTR serviceName)
+{
+    HRESULT hr = S_OK;
+    SC_HANDLE hSCManager = OpenSCManager(NULL, NULL, SC_MANAGER_CONNECT);
+    if (!hSCManager)
+    {
+        return HRESULT_FROM_WIN32(GetLastError());
+    }
+    SAFEARRAY* pServicesArray = NULL;
+    DWORD dwServicesReturned = 0;
+
+    hr = GetDependentServices(serviceName, &pServicesArray, &dwServicesReturned);
+
+    if (FAILED(hr))
+    {
+        goto cleanup;
+    }
+
+    LPBSTR pServiceNames = NULL;
+    hr = SafeArrayAccessData(pServicesArray, (LPVOID*)&pServiceNames);
+    if (FAILED(hr))
+    {
+        goto cleanup;
+    }
+
+    for (LONG i = dwServicesReturned - 1; i >= 0; i--)
+    {
+        SC_HANDLE hDependentService = OpenService(hSCManager, pServiceNames[i], SERVICE_STOP);
+        
+        if (hDependentService)
+            ControlService(pServiceNames[i], SERVICE_CONTROL_STOP, SERVICE_STOP, 30000);
+        
+        else
+            CloseServiceHandle(hDependentService);
+    }
+    SafeArrayUnaccessData(pServicesArray);
+
+    return hr;
+cleanup:
+    if (pServicesArray)
+        SafeArrayDestroy(pServicesArray);
+    CloseServiceHandle(hSCManager);
+    return hr;
 }
 
 STDMETHODIMP CServiceHandler::ServicePause(BSTR serviceName)
@@ -214,7 +260,6 @@ STDMETHODIMP CServiceHandler::ServiceResume(BSTR serviceName)
 {
     return ControlService(serviceName, SERVICE_CONTROL_CONTINUE, SERVICE_RUNNING, cdwTimeout);
 }
-
 
 STDMETHODIMP CServiceHandler::ServiceRestart(BSTR serviceName)
 {

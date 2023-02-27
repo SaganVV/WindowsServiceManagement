@@ -61,6 +61,7 @@ public:
 	STDMETHOD(ServiceRestart)(BSTR serviceName);
 	STDMETHOD(ServiceControlsAccepted)(BSTR serviceName, LPDWORD dwControlsAccepted);
 	STDMETHOD(GetDependentServices)(BSTR serviceName, SAFEARRAY** pOut, LPDWORD lpdwServicesReturned);
+	STDMETHOD(StopDependentServices)(BSTR serviceName);
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(ServiceHandler), CServiceHandler)

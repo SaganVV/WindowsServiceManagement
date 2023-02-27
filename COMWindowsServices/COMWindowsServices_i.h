@@ -128,6 +128,9 @@ EXTERN_C const IID IID_IServiceHandler;
             /* [out] */ SAFEARRAY * *pOut,
             /* [out] */ LPDWORD lpdwServicesReturned) = 0;
         
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE StopDependentServices( 
+            /* [in] */ BSTR serviceName) = 0;
+        
     };
     
     
@@ -243,6 +246,11 @@ EXTERN_C const IID IID_IServiceHandler;
             /* [out] */ SAFEARRAY * *pOut,
             /* [out] */ LPDWORD lpdwServicesReturned);
         
+        DECLSPEC_XFGVIRT(IServiceHandler, StopDependentServices)
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *StopDependentServices )( 
+            IServiceHandler * This,
+            /* [in] */ BSTR serviceName);
+        
         END_INTERFACE
     } IServiceHandlerVtbl;
 
@@ -305,6 +313,9 @@ EXTERN_C const IID IID_IServiceHandler;
 
 #define IServiceHandler_GetDependentServices(This,serviceName,pOut,lpdwServicesReturned)	\
     ( (This)->lpVtbl -> GetDependentServices(This,serviceName,pOut,lpdwServicesReturned) ) 
+
+#define IServiceHandler_StopDependentServices(This,serviceName)	\
+    ( (This)->lpVtbl -> StopDependentServices(This,serviceName) ) 
 
 #endif /* COBJMACROS */
 

@@ -31,3 +31,4 @@ To use this application, follow the steps below:
 * Adding support for more advanced service management tasks
 * Refactoring the existing code to improve performance and readability
 * Splitting the existing interface into multiple interfaces to improve maintainability
+* Make the GUI work correctly

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvServices = new System.Windows.Forms.DataGridView();
             this.ServiceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ServiceState = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,14 +58,14 @@
             this.dgvServices.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ServiceName,
             this.ServiceState});
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvServices.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvServices.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvServices.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvServices.Location = new System.Drawing.Point(15, 42);
             this.dgvServices.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -78,6 +78,7 @@
             this.dgvServices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvServices.Size = new System.Drawing.Size(560, 326);
             this.dgvServices.TabIndex = 0;
+            this.dgvServices.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvServices_CellDoubleClick);
             this.dgvServices.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvServices_CellClick);
             this.dgvServices.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvServices_CellContentClick);
             // 
@@ -111,7 +112,6 @@
             this.panelContent.Name = "panelContent";
             this.panelContent.Size = new System.Drawing.Size(587, 423);
             this.panelContent.TabIndex = 3;
-            this.panelContent.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContent_Paint);
             // 
             // txtbServiceName
             // 
@@ -122,7 +122,6 @@
             this.txtbServiceName.Name = "txtbServiceName";
             this.txtbServiceName.Size = new System.Drawing.Size(313, 24);
             this.txtbServiceName.TabIndex = 8;
-            this.txtbServiceName.TextChanged += new System.EventHandler(this.txtbServiceName_TextChanged);
             // 
             // btnFindService
             // 

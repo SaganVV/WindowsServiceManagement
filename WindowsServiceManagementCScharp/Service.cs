@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace WindowsServiceManagementCScharp
 {
@@ -86,6 +87,29 @@ namespace WindowsServiceManagementCScharp
             }
 
             return services;
+        }
+        public static Service[] GetDependentServicesNames(string serviceName)
+        {
+            Array serviceNames;
+            uint countServicesReturned;
+            try
+            {
+                new ServiceHandler().GetDependentServices(serviceName, out serviceNames, out countServicesReturned);
+                /*                Service[] services = new Service[serviceNames.Length];
+                                for (int i = 0; i < serviceNames.Length; i++)
+                                {
+                                    services[i] = new Service((string)serviceNames.GetValue(i));
+                                }
+                                return services;*/
+                return null;
+
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message); return null; }
+            
+        }
+        public Service[] GetDependentServicesNames()
+        {
+            return GetDependentServicesNames(Name);
         }
     }
 }

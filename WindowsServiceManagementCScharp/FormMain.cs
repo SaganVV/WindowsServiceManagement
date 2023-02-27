@@ -39,13 +39,11 @@ namespace WindowsServiceManagementCScharp
 
         }
 
-        private void UpdateServicesGrid(string nameBegin)
+        private void UpdateServicesGrid(string startWith)
         {
             dgvServices.Rows.Clear();
 
-            var filteredServices = services
-                .Where(service => service.Name.ToLower().StartsWith(nameBegin.ToLower()))
-                .Select(service => new[] { service.Name, service.GetState().ToString() });
+            var filteredServices = DataGridViewHandler.ServicesToDataGridRowFormat(DataGridViewHandler.SelecteService(services, startWith)) ;
 
             foreach (var serviceData in filteredServices)
             {
@@ -131,76 +129,47 @@ namespace WindowsServiceManagementCScharp
         private void FormMainMenu_Load(object sender, EventArgs e)
         {
             dgvServices.ClearSelection();
+           // dgvServices.Rows.Add()
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            try
-            {
-                new ServiceHandler().ServiceStart(selectedServiceName);
-                MessageBox.Show("Service successfully started");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            ButtonHandler.StartServiceButtonHandler(selectedServiceName);
         }
 
         private void btnContinue_Click(object sender, EventArgs e)
         {
-            
-            try
-            {
-                new ServiceHandler().ServiceResume(selectedServiceName);
-                MessageBox.Show("Service successfully resumed");
-            }
-            catch(Exception ex) 
-            {
-                MessageBox.Show(ex.Message);
-            }
+            ButtonHandler.ContinueServiceButtonHandler(selectedServiceName);
         }
 
         private void btnPause_Click(object sender, EventArgs e)
         {
-            
-            try
-            {
-                new ServiceHandler().ServicePause(selectedServiceName);
-                MessageBox.Show("Service successfully paused");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            ButtonHandler.PauseServiceButtonHandler(selectedServiceName);
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            
-            try
-            {
-                new ServiceHandler().ServiceStop(selectedServiceName);
-                MessageBox.Show("Service successfully stopped");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void panelContent_Paint(object sender, PaintEventArgs e)
-        {
-
+            ButtonHandler.StopServiceButtonHandler(selectedServiceName);
         }
 
         private void dgvServices_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            
         }
-
-        private void txtbServiceName_TextChanged(object sender, EventArgs e)
+        private void dgvServices_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvServices.Rows[e.RowIndex];
+                if (row != null)
+                {
+                    selectedServiceName = (string)row.Cells[0].Value;
+                    ActivateServiceControlButtons();
+                }
+            }
+            FormService form2 = new FormService();
+            form2.setTextTo_txtBServiceName(selectedServiceName);
+            form2.ShowDialog();
         }
     }
 }

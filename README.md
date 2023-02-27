@@ -34,4 +34,4 @@ To use this application, follow the steps below:
 * Make the GUI work correctly
 
 ## Notes ##
-The function GetDependentServices, as well as the GUI code that uses it, currently has a problem that needs to be addressed. I am working on fixing it as soon as possible.
+The function StopDependentServices doesn't work correctly, as well as the GUI code that uses it, currently has a problem that needs to be addressed. I am working on fixing it as soon as possible.

@@ -34,4 +34,4 @@ To use this application, follow the steps below:
 * Make the GUI work correctly
 
 ## Notes ##
-The function StopDependentServices doesn't work correctly, as well as the GUI code that uses it, currently has a problem that needs to be addressed. I am working on fixing it as soon as possible.
+The function StopDependentServices doesn't work correctly, so currently it's impossible to stop service, that has dependent services. I am working on fixing it as soon as possible. Also, I am working on fixing GUI.

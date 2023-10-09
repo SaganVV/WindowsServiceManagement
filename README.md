@@ -26,12 +26,3 @@ To use this application, follow the steps below:
 3) Build the "WindowsServiceManagementCSharpGUI" project using the same platform or higher that you used for the COM setup
 
 **Note:** For full functionality, it is recommended that you run the application with administrator privileges, as otherwise some features may be limited.
-
-## Future Plans ##
-* Adding support for more advanced service management tasks
-* Refactoring the existing code to improve performance and readability
-* Splitting the existing interface into multiple interfaces to improve maintainability
-* Make the GUI work correctly
-
-## Notes ##
-The function StopDependentServices doesn't work correctly, so currently it's impossible to stop service, that has dependent services. I am working on fixing it as soon as possible. Also, I am working on fixing GUI.

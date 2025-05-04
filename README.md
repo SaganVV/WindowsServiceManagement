@@ -1,7 +1,7 @@
 # Windows Service Management
 
 ## Description ##
-Welcome to the Windows Service Management project, which aims to provide a convenient and efficient way to manage Windows services. This implementation features a custom COM object built using C++ ATL, allowing for basic service operations. For this project, I chose to build a C# GUI due to its simplicity and flexibility. Although not a C# expert, I am continuously working on improving the code and adding more features as I gain more experience with the language.
+Welcome to the Windows Service Management project, which aims to provide a convenient and efficient way to manage Windows services. This implementation features a custom COM object built using C++ ATL, allowing for basic service operations. For this project, I chose to build a C# GUI due to its simplicity and flexibility.
 
 
 <img src="images/app.jpg" width="500">
